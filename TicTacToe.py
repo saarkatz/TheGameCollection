@@ -40,6 +40,8 @@ def main():
         ] for j in range(3)
     ]
 
+    turn = 1
+
     try:
         while 1:
             event = pygame.event.wait()
@@ -48,6 +50,15 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE or event.unicode == 'q':
                     break
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                for i in range(3):
+                    for j in range(3):
+                        if board[i][j] == NOPLAYER and board_view[i][j].collidepoint(pygame.mouse.get_pos()):
+                            if turn % 2 == 1:
+                                board[i][j] = PLAYER1
+                            else:
+                                board[i][j] = PLAYER2
+                            turn += 1
 
             screen.fill(PURPLE)
             pygame.draw.rect(screen, BLACK, [TOPRIGHT_CORNER[0], TOPRIGHT_CORNER[1],
