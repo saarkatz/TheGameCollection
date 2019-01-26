@@ -1,32 +1,43 @@
 import pygame
-from TicTacToe import TicTacToe
-from Screen import Screen
+from Scene import Scene
+from MainMenu import MainMenu
 from Event import Event
 
 
 # The main function. Contains the main loop of the game
 def main():
     pygame.init()
-    scene = TicTacToe()
-    Screen.screen = pygame.display.set_mode(scene.get_resolution())
-    pygame.display.set_caption(scene.caption)
+    Scene.change_scene(Scene)
 
-    while 1:
+    game = True
+
+    try:
+        Scene.change_scene(MainMenu)
+    except Exception as e:
+        print(e)
+        game = False
+
+    while game:
         # Handle quit events
         Event.event = pygame.event.wait()
         if Event.event.type == pygame.QUIT:
-            break
+            game = False
         if Event.event.type == pygame.KEYDOWN:
             if Event.event.key == pygame.K_ESCAPE or Event.event.unicode == 'q':
-                break
+                game = False
 
         try:
-            scene.step()
+            Scene.scene.step()
         except Exception as e:
             print(e)
-            break
+            game = False
 
         pygame.display.update()
+    else:
+        try:
+            Scene.scene.stop()
+        except Exception as e:
+            print(e)
 
     pygame.quit()
 
