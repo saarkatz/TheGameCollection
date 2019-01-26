@@ -1,4 +1,7 @@
 import pygame
+from Scene import Scene
+from Screen import Screen
+from Event import Event
 
 # The title of the windows
 CAPTION = 'TicTacToe'
@@ -25,64 +28,51 @@ PLAYER2 = RED
 
 
 # The main function. Contains the main loop of the game
-def main():
-    pygame.init()
-    screen = pygame.display.set_mode(RESOLUTION)
-    pygame.display.set_caption(CAPTION)
+class TicTacToe(Scene):
+    def __init__(self):
+        super(TicTacToe, self).__init__()
+        self.caption = CAPTION
+        self.resolution = RESOLUTION
 
-    # The model of the board
-    board = [
-        [NOPLAYER, NOPLAYER, NOPLAYER],
-        [NOPLAYER, NOPLAYER, NOPLAYER],
-        [NOPLAYER, NOPLAYER, NOPLAYER]
-    ]
+        # The model of the board
+        self.board = [
+            [NOPLAYER, NOPLAYER, NOPLAYER],
+            [NOPLAYER, NOPLAYER, NOPLAYER],
+            [NOPLAYER, NOPLAYER, NOPLAYER]
+        ]
 
-    # The view of the board
-    board_view = [
-        [
-            pygame.Rect(
-                TOPRIGHT_CORNER[0] + BORDER_SIZE[0] + (SQUERE_SIZE[0] + BORDER_SIZE[0]) * i,
-                TOPRIGHT_CORNER[1] + BORDER_SIZE[1] + (SQUERE_SIZE[1] + BORDER_SIZE[1]) * j,
-                SQUERE_SIZE[0], SQUERE_SIZE[1]
-            ) for i in range(3)
-        ] for j in range(3)
-    ]
+        # The view of the board
+        self.board_view = [
+            [
+                pygame.Rect(
+                    TOPRIGHT_CORNER[0] + BORDER_SIZE[0] + (SQUERE_SIZE[0] + BORDER_SIZE[0]) * i,
+                    TOPRIGHT_CORNER[1] + BORDER_SIZE[1] + (SQUERE_SIZE[1] + BORDER_SIZE[1]) * j,
+                    SQUERE_SIZE[0], SQUERE_SIZE[1]
+                ) for i in range(3)
+            ] for j in range(3)
+        ]
 
-    turn = 1
+        self.turn = 1
 
-    try:
-        while 1:
-            # Handle quit events
-            event = pygame.event.wait()
-            if event.type == pygame.QUIT:
-                break
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE or event.unicode == 'q':
-                    break
-
-            # Game logic
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                for i in range(3):
-                    for j in range(3):
-                        if board[i][j] == NOPLAYER and board_view[i][j].collidepoint(pygame.mouse.get_pos()):
-                            if turn % 2 == 1:
-                                board[i][j] = PLAYER1
-                            else:
-                                board[i][j] = PLAYER2
-                            turn += 1
-
-            # Draw the board
-            screen.fill(PURPLE)
-            pygame.draw.rect(screen, BLACK, [TOPRIGHT_CORNER[0], TOPRIGHT_CORNER[1],
-                                             BOARD_SIZE[0], BOARD_SIZE[1]])
+    def step(self):
+        # Game logic
+        # TODO: Change the way events are handled
+        if Event.event.type == pygame.MOUSEBUTTONDOWN and Event.event.button == 1:
             for i in range(3):
                 for j in range(3):
-                    pygame.draw.rect(screen, board[i][j], board_view[i][j])
-            pygame.display.update()
+                    if self.board[i][j] == NOPLAYER and \
+                            self.board_view[i][j].collidepoint(pygame.mouse.get_pos()):
+                        if self.turn % 2 == 1:
+                            self.board[i][j] = PLAYER1
+                        else:
+                            self.board[i][j] = PLAYER2
+                        self.turn += 1
 
-    finally:
-        pygame.quit()
-
-
-if __name__ == '__main__':
-    main()
+        # Draw the board
+        # TODO: Change the way the screen is accessed
+        Screen.screen.fill(PURPLE)
+        pygame.draw.rect(Screen.screen, BLACK, [TOPRIGHT_CORNER[0], TOPRIGHT_CORNER[1],
+                                         BOARD_SIZE[0], BOARD_SIZE[1]])
+        for i in range(3):
+            for j in range(3):
+                pygame.draw.rect(Screen.screen, self.board[i][j], self.board_view[i][j])
