@@ -54,6 +54,11 @@ class TicTacToe(Scene):
 
         self.turn = 1
 
+    def start(self):
+        Screen.screen.fill(PURPLE)
+        pygame.draw.rect(Screen.screen, BLACK, [TOPRIGHT_CORNER[0], TOPRIGHT_CORNER[1],
+                                         BOARD_SIZE[0], BOARD_SIZE[1]])
+
     def step(self):
         # Game logic
         # TODO: Change the way events are handled
@@ -70,9 +75,6 @@ class TicTacToe(Scene):
 
         # Draw the board
         # TODO: Change the way the screen is accessed
-        Screen.screen.fill(PURPLE)
-        pygame.draw.rect(Screen.screen, BLACK, [TOPRIGHT_CORNER[0], TOPRIGHT_CORNER[1],
-                                         BOARD_SIZE[0], BOARD_SIZE[1]])
         for i in range(3):
             for j in range(3):
                 pygame.draw.rect(Screen.screen, self.board[i][j], self.board_view[i][j])

@@ -1,2 +1,2 @@
-class Screen():
+class Screen:
     screen = None

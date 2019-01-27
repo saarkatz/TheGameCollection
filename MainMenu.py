@@ -37,6 +37,7 @@ class MainMenu(Scene):
         if Event.event.type == pygame.MOUSEBUTTONDOWN and Event.event.button == 1:
             if self.text_rect.collidepoint(pygame.mouse.get_pos()):
                 Scene.change_scene(TicTacToe)
+                return
 
         # Draw the board
         Screen.screen.blit(self.text_surf, self.text_rect)

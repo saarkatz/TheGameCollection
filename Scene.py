@@ -1,6 +1,7 @@
 import pygame
 from Screen import Screen
 
+
 # Interface for scene object.
 # TODO: Change the scene to be more managed by the main loop
 class Scene:

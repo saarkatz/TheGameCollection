@@ -1,2 +1,2 @@
-class Event():
+class Event:
     event = None
