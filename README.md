@@ -15,3 +15,4 @@ The list of games we will work on initialy
 - Grow puzzle game
 - Pacman
 - Image puzzle
+- Insaniquarium-like
