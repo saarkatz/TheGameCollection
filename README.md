@@ -10,9 +10,13 @@ The list of games we will work on initialy
 - 4 in a row
 - Snake
 - 2048
-- Obsticle dodging driving gane
+- Obsticle dodging driving game
 - Match 3
-- Grow puzzle game
-- Pacman
+- Grow puzzle game 
+- Pacman-like
 - Image puzzle
 - Insaniquarium-like
+- Tetris-like
+- Breakout-like
+- Dino Run-like
+- Space invaders-like
