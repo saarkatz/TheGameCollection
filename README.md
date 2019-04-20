@@ -2,7 +2,7 @@
 A collection of simple games.
 
 ## The Environment
-We will be using python with pygame. An arbitrary choice at the moment.
+We will be using python with pygame. An arbitrary choice.
 
 ## The games
 The list of games we will work on initialy
