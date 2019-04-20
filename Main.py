@@ -17,9 +17,9 @@ def main():
     log.info('Starting pygame')
     pygame.init()
 
-    game = True
     # Initialize the main menu
     # Manage possible exception in the main menu itself
+    game = True
     try:
         Scene.change_scene(MainMenu)
     except Exception:
@@ -46,7 +46,8 @@ def main():
         pygame.display.update()
     else:
         try:
-            Scene.scene.stop()
+            if Scene.scene:
+                Scene.scene.stop()
         except Exception:
             log.exception('Got exception while stopping scene to quit pygame')
 
