@@ -31,8 +31,8 @@ PLAYER2 = RED
 class TicTacToe(Scene):
     def __init__(self):
         super(TicTacToe, self).__init__()
-        self.caption = CAPTION
-        self.resolution = RESOLUTION
+        self.set_caption(CAPTION)
+        self.set_resolution(RESOLUTION)
 
         # The model of the board
         self.board = [
@@ -53,6 +53,10 @@ class TicTacToe(Scene):
         ]
 
         self.turn = 1
+
+    def on_resolution_change(self):
+        super(TicTacToe, self).on_resolution_change()
+        self.start()
 
     def start(self):
         Screen.screen.fill(PURPLE)

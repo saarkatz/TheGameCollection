@@ -21,8 +21,8 @@ RED = (128, 0, 0)
 class MainMenu(Scene):
     def __init__(self):
         super(MainMenu, self).__init__()
-        self.caption = CAPTION
-        self.resolution = RESOLUTION
+        self.set_caption(CAPTION)
+        self.set_resolution(RESOLUTION)
 
         self.large_text = pygame.font.Font('freesansbold.ttf', 100)
         self.text_surf = self.large_text.render('TicTacToe', True, BLACK)
