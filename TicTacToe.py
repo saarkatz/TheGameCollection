@@ -1,3 +1,4 @@
+from CallbackProperty import make_callback
 import pygame
 from Scene import Scene
 from Screen import Screen
@@ -27,13 +28,15 @@ PLAYER1 = BLUE
 PLAYER2 = RED
 
 
-# The main function. Contains the main loop of the game
+def resolution_callback(self, value):
+    Screen.set_screen(pygame.display.set_mode(value))
+    self.start()
+
+
+@make_callback('resolution', resolution_callback, advanced_params=True)
 class TicTacToe(Scene):
     def __init__(self):
-        super(TicTacToe, self).__init__()
-        self.set_caption(CAPTION)
-        self.set_resolution(RESOLUTION)
-
+        super(TicTacToe, self).__init__(CAPTION, RESOLUTION)
         # The model of the board
         self.board = [
             [NOPLAYER, NOPLAYER, NOPLAYER],
@@ -53,10 +56,6 @@ class TicTacToe(Scene):
         ]
 
         self.turn = 1
-
-    def on_resolution_change(self):
-        super(TicTacToe, self).on_resolution_change()
-        self.start()
 
     def start(self):
         Screen.screen.fill(PURPLE)

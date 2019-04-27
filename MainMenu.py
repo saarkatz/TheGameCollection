@@ -17,13 +17,9 @@ BLUE = (0, 0, 128)
 RED = (128, 0, 0)
 
 
-# The main function. Contains the main loop of the game
 class MainMenu(Scene):
     def __init__(self):
-        super(MainMenu, self).__init__()
-        self.set_caption(CAPTION)
-        self.set_resolution(RESOLUTION)
-
+        super().__init__(CAPTION, RESOLUTION)
         self.large_text = pygame.font.Font('freesansbold.ttf', 100)
         self.text_surf = self.large_text.render('TicTacToe', True, BLACK)
         self.text_rect = self.text_surf.get_rect()

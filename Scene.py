@@ -1,3 +1,4 @@
+from CallbackProperty import make_callback
 import pygame
 from Screen import Screen
 from SceneChangedException import SceneChangedException
@@ -5,33 +6,20 @@ from SceneChangedException import SceneChangedException
 
 # Interface for scene object.
 # TODO: Change the scene to be more managed by the main loop
+@make_callback('caption', lambda value: pygame.display.set_caption(value), advanced_params=True)
+@make_callback('resolution', lambda value: Screen.set_screen(pygame.display.set_mode(value)), advanced_params=True)
 class Scene:
     """
     A Scene is responsible for the execution of a given game loop.
     """
     scene = None
 
-    def __init__(self):
-        self._caption = 'Pygame'
-        self._resolution = (500, 500)
-        pass
+    def __init__(self, caption, resolution):
+        self._init_caption()
+        self._init_resolution()
 
-    def get_caption(self):
-        return self._caption
-
-    def set_caption(self, caption):
-        self._caption = caption
-        self.on_caption_change()
-
-    def on_caption_change(self):
-        pygame.display.set_caption(self.get_caption())
-
-    def get_resolution(self):
-        return self._resolution
-
-    def set_resolution(self, resolution):
-        self._resolution = resolution
-        self.on_resolution_change()
+        self.caption = caption
+        self.resolution = resolution
 
     def on_resolution_change(self):
         Screen.screen = pygame.display.set_mode(self.get_resolution())
