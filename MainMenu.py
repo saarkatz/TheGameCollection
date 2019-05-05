@@ -79,20 +79,25 @@ class Text(ViewObject):
 class MainMenu(Scene):
     def __init__(self):
         super().__init__(CAPTION, RESOLUTION)
-        self.large_text = pygame.font.Font('freesansbold.ttf', 100)
-        self.text_surf = self.large_text.render('TicTacToe', True, BLACK)
-        self.text_rect = self.text_surf.get_rect()
-        self.text_rect.center = ((Screen.screen.get_width() / 2), (Screen.screen.get_height()/ 2))
+        self.view = VerticalView((0, 0), (100, 60))
+        self.view.anchor = 'center'
+        self.view.position = (Screen.screen.get_width() / 2, Screen.screen.get_height() / 2)
 
-    def start(self):
-        Screen.screen.fill(WHITE)
+        self.view.append_object(Text('TicTacToe', size=20))
+        self.view.append_object(Text('TicTacToe2', size=20))
+        self.view.append_object(Text('TicTacToe3', size=20))
+
+    # def start(self):
+    #     pass
 
     def step(self):
         # Game logic
-        if Event.event.type == pygame.MOUSEBUTTONDOWN and Event.event.button == 1:
-            if self.text_rect.collidepoint(pygame.mouse.get_pos()):
-                Scene.change_scene(TicTacToe)
-                return
+        # if Event.event.type == pygame.MOUSEBUTTONDOWN and Event.event.button == 1:
+        #     if self.text.rect.collidepoint(pygame.mouse.get_pos()):
+        #         Scene.change_scene(TicTacToe)
+        #         return
 
         # Draw the board
-        Screen.screen.blit(self.text_surf, self.text_rect)
+        Screen.screen.fill(WHITE)
+        for t in self.view.objects_list:
+            Screen.screen.blit(t.surf, t.rect)
