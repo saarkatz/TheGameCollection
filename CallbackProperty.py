@@ -70,16 +70,20 @@ class AdvancedCallbackProperty(property):
         :param callbacks: Callback arguments to initialize an instance with.
         :type callbacks: func(any)
         """
-        name = '_' + name
+        _name = '_' + name
 
         def getter(self):
             """The getter function of the property"""
-            return getattr(self, name).value
+            return getattr(self, _name).value
 
         def setter(self, value):
             """The setter function of the property"""
-
-            cbdata = getattr(self, name)
+            try:
+                cbdata = getattr(self, _name)
+            except AttributeError:
+                # TODO: Organize exceptions
+                raise Exception('The property "{0}" was not initialized! Call the _init_{0} method before the first use'
+                                ' of {0}, preferably at the beginning of __init__.'.format(name))
             for cb in cbdata.cblist:
                 params = ('value', 'self', 'prev')
                 parameters = cb.__code__.co_varnames
