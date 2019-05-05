@@ -110,7 +110,7 @@ class AdvancedCallbackProperty(property):
 # callback mechanism as you might cause exceptions, not knowing what you're doing.
 # When overriding a property by calling make_callback in a subclass, the callbacks initialized on the super class will
 # be overridden by new callbacks in the call to make_callback.
-def make_callback(var_name, *callbacks, advanced_params=False):
+def make_callback(var_name, *callbacks, advanced_params=True):
     """Class decorator to initialize a variable to support the callback mechanism.
     This function also creates two additional functions for the management of the callbacks of the variable. These are
     {var_name}_add_callback(callback) - Adds a callback to the variable

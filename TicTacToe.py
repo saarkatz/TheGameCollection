@@ -33,7 +33,7 @@ def resolution_callback(self, value):
     self.start()
 
 
-@make_callback('resolution', resolution_callback, advanced_params=True)
+@make_callback('resolution', resolution_callback)
 class TicTacToe(Scene):
     def __init__(self):
         super(TicTacToe, self).__init__(CAPTION, RESOLUTION)

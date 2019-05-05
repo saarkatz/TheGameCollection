@@ -6,8 +6,8 @@ from SceneChangedException import SceneChangedException
 
 # Interface for scene object.
 # TODO: Change the scene to be more managed by the main loop
-@make_callback('caption', lambda value: pygame.display.set_caption(value), advanced_params=True)
-@make_callback('resolution', lambda value: Screen.set_screen(pygame.display.set_mode(value)), advanced_params=True)
+@make_callback('caption', lambda value: pygame.display.set_caption(value))
+@make_callback('resolution', lambda value: Screen.set_screen(pygame.display.set_mode(value)))
 class Scene:
     """
     A Scene is responsible for the execution of a given game loop.
