@@ -29,6 +29,7 @@ class Scene:
         The start function is called once whenever the scene is entered.
         If an exception occurs in this function
         """
+        # TODO: Finish the documentation here
         pass
 
     def step(self):
