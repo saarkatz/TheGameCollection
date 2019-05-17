@@ -175,8 +175,8 @@ def make_callback(var_name, *callbacks, advanced_params=True):
 
     def clear_callbacks(self):
         getattr(self, _var_name).clear_callbacks()
-    remove_callback.__name__ = var_name + '_clear_callbacks'
-    remove_callback.__doc__ = """Clear all the callbacks assigned to the property {0}.""".format(var_name)
+    clear_callbacks.__name__ = var_name + '_clear_callbacks'
+    clear_callbacks.__doc__ = """Clear all the callbacks assigned to the property {0}.""".format(var_name)
 
 
     def class_decorator(cls):
@@ -190,5 +190,7 @@ def make_callback(var_name, *callbacks, advanced_params=True):
         # Set the callback functions
         setattr(cls, add_callback.__name__, add_callback)
         setattr(cls, remove_callback.__name__, remove_callback)
+        setattr(cls, clear_callbacks.__name__, clear_callbacks)
+        # TODO: Add the clear callbacks function
         return cls
     return class_decorator
