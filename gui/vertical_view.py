@@ -20,7 +20,7 @@ class VerticalView(GUIObject):
             return
         height = self.rect.size[1] / len(self.objects_list)
         for i, obj in enumerate(self.objects_list):
-            obj.parent.position = (self.position[0], self.position[1] + i * height)
+            obj.parent.position = (0, i * height)
             obj.parent.rect.size = (self.rect.size[0], height)
 
     def _wrap_with_panel(self, obj):
