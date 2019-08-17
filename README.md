@@ -7,7 +7,7 @@ We will be using python with pygame. An arbitrary choice.
 ## Documentation
 More information about the project and the ideas within can be found in the docs directory.
 
-## The games
+## The Games
 The list of games we will work on initially
 - Tic Tac Toe
 - 4 in a Row
