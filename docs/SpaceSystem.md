@@ -17,7 +17,7 @@ environment.
     - rotation
     - scale
 - Vector (Immutable)
-    - arithmetic opperations
+    - arithmetic operations
 - Primitive Members (Primitives)
     - regular shapes
     - polygon shapes
