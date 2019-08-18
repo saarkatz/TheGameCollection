@@ -6,7 +6,7 @@ from engine.space.space2d import Vector
 
 class Transform:
     def __init__(self):
-        position = Vector(0, 0)
+        position = Vector.zero()
         rotation = 0
-        scale = Vector(0, 0)
+        scale = Vector.zero()
 
