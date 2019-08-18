@@ -10,3 +10,27 @@ This space is used for the screen space as well as a 2D environment for the game
 This is the space with the simples camera system as there is little to no translation needed between 2D environment and
 the screen space. However, the camera system can still be used to augment modify and customize the view of the
 environment.
+
+### Space 2D would include
+- Transform
+    - position
+    - rotation
+    - scale
+- Vector (Immutable)
+    - arithmetic opperations
+- Primitive Members (Primitives)
+    - regular shapes
+    - polygon shapes
+    - parametric curve shapes
+- Asset Support
+    - image support (static/dynamic)
+    - Modification infrastructure
+        - Slicing/Stitching
+        - Dynamic construction
+- Camera (Cast to 2D surface)
+    - transform
+    - camera parameters (visual effects)
+        - resolution
+        - contrast
+        - colors
+    - Anti-Aliasing
