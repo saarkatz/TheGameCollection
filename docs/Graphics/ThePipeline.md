@@ -8,4 +8,6 @@ The steps required for rendering depend on the method that is used
 and their implementation may or may not depend on both the method and
 the hardware. 
 
-<img src="ThePipeline/ThePipeline.png" width="521" height="81">
+<p align="center">
+    <img src="ThePipeline/ThePipeline.png" width="521" height="81"/>
+</p>
