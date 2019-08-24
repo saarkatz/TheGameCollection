@@ -1,5 +1,6 @@
 """
-Transform is responsible for all the spatial meta data an object in the space would need.
+Transform is responsible for all the spatial meta data an object in the
+space would need.
 """
 from engine.space.space2d import Vector
 

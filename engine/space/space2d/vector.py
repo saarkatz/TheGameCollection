@@ -1,5 +1,6 @@
 """
-Vector is responsible for supplying the underling operations needed for vector arithmetics.
+Vector is responsible for supplying the underling operations needed for
+vector arithmetics.
 """
 from math import sqrt, cos, sin, asin
 from typing import Sequence
@@ -7,6 +8,7 @@ from typing import Sequence
 
 class Vector(Sequence):
     """Immutable vector type"""
+
     def __init__(self, x, y):
         self._vector = (x, y)
 
@@ -101,17 +103,21 @@ class Vector(Sequence):
         if Vector._test_type(self, power):
             if modulo:
                 if Vector._test_type(self, modulo):
-                    return Vector(self.x ** power[0] % modulo[0], self.y ** power[1] % modulo[1])
+                    return Vector(self.x ** power[0] % modulo[0],
+                                  self.y ** power[1] % modulo[1])
                 else:
-                    return Vector(self.x ** power[0] % modulo, self.y ** power[1] % modulo)
+                    return Vector(self.x ** power[0] % modulo,
+                                  self.y ** power[1] % modulo)
             else:
                 return Vector(self.x ** power[0], self.y ** power[1])
         elif isinstance(power, (int, float)):
             if modulo:
                 if Vector._test_type(self, modulo):
-                    return Vector(self.x ** power % modulo[0], self.y ** power % modulo[1])
+                    return Vector(self.x ** power % modulo[0],
+                                  self.y ** power % modulo[1])
                 else:
-                    return Vector(self.x ** power % modulo, self.y ** power % modulo)
+                    return Vector(self.x ** power % modulo,
+                                  self.y ** power % modulo)
             else:
                 return Vector(self.x ** power, self.y ** power)
         else:
@@ -249,7 +255,7 @@ if __name__ == '__main__':
     assert v12.x == 1.5 and v12.y == 2.0
     # True div vector
     v13 = v10 / v2
-    assert v13.x == 27/4 and v13.y == 256/5
+    assert v13.x == 27 / 4 and v13.y == 256 / 5
 
     # floor div number
     v14 = v1 // 2
@@ -276,6 +282,7 @@ if __name__ == '__main__':
 
     # From polar
     from math import pi
+
     v19 = Vector.from_polar(1, pi / 2)
     v20 = Vector.from_polar(2, pi)
     assert v19.x < 1e-10 and v19.y == 1
