@@ -8,4 +8,3 @@ The steps required for rendering depend on the method that is used
 and their implementation may or may not depend on both the method and
 the hardware. 
 
-![The Pipeline](ThePipeline/ThePipeline.png)
