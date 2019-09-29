@@ -1,0 +1,4 @@
+{"name": "Coridor",
+"description": "You're now in the largest coridor of the castle. Huge chandaliers light the place. You can see different drawings on the walls.",
+"neighbors": {"w": 3}
+}

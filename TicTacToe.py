@@ -1,4 +1,5 @@
 import pygame
+import time
 
 # The title of the windows
 CAPTION = 'TicTacToe'
@@ -12,6 +13,10 @@ PURPLE = (128, 0, 128)
 BLUE = (0, 0, 128)
 RED = (128, 0, 0)
 
+# board rows and columns
+ROWS = 3
+COLUMNS = 3
+
 # The shape of the board
 BOARD_SIZE = (400, 400)
 BORDER_SIZE = (10, 10)
@@ -19,23 +24,59 @@ TOPRIGHT_CORNER = ((RESOLUTION[0] - BOARD_SIZE[0]) / 2, (RESOLUTION[1] - BOARD_S
 SQUERE_SIZE = ((BOARD_SIZE[0] - BORDER_SIZE[0] * 4) / 3, (BOARD_SIZE[1] - BORDER_SIZE[1] * 4) / 3)
 
 # Player constants
-NOPLAYER = WHITE
-PLAYER1 = BLUE
-PLAYER2 = RED
+NOPLAYER = 0
+PLAYER1 = 1
+PLAYER2 = 2
+
+# player colors
+NOPLAYER_COLOR = WHITE
+PLAYER1_COLOR = BLUE
+PLAYER2_COLOR = RED
+PLAYER_COLORS = (NOPLAYER_COLOR, PLAYER1_COLOR, PLAYER2_COLOR)
+
+# TODO: ask players what are they're names, and print the winners name at the end (instead of "player 1/2")
+WINNING_MESSAGE = 'Congratulations {0} you are the winner!!!'
+
+
+# TODO: understand why this function doesn't work...
+# Check if current player won the game
+def is_win(player, board, curr_row, curr_col):
+    curr_color = PLAYER1_COLOR
+    if player == 1:
+        curr_color = PLAYER2_COLOR
+
+    # print(curr_color)
+    # print()
+
+    # check if a player finished a row
+    count = 0
+    for column in range(COLUMNS):
+        if not board[curr_row][column] == curr_color:
+            # print(board[curr_row][column])
+            count += 1
+            break
+    if count == 3:
+        return True
+    count = 0
+    for row in range(ROWS):
+        if not board[curr_col][row] == curr_color:
+            count += 1
+            break
+    if count == 3:
+        return True
+
+    return False
 
 
 # The main function. Contains the main loop of the game
 def main():
     pygame.init()
+    pygame.font.init()
     screen = pygame.display.set_mode(RESOLUTION)
     pygame.display.set_caption(CAPTION)
 
     # The model of the board
-    board = [
-        [NOPLAYER, NOPLAYER, NOPLAYER],
-        [NOPLAYER, NOPLAYER, NOPLAYER],
-        [NOPLAYER, NOPLAYER, NOPLAYER]
-    ]
+    board = [[NOPLAYER] * ROWS] * COLUMNS
 
     # The view of the board
     board_view = [
@@ -44,14 +85,15 @@ def main():
                 TOPRIGHT_CORNER[0] + BORDER_SIZE[0] + (SQUERE_SIZE[0] + BORDER_SIZE[0]) * i,
                 TOPRIGHT_CORNER[1] + BORDER_SIZE[1] + (SQUERE_SIZE[1] + BORDER_SIZE[1]) * j,
                 SQUERE_SIZE[0], SQUERE_SIZE[1]
-            ) for i in range(3)
-        ] for j in range(3)
+            ) for i in range(COLUMNS)
+        ] for j in range(ROWS)
     ]
 
     turn = 1
 
+    victory = False
     try:
-        while 1:
+        while not victory:
             # Handle quit events
             event = pygame.event.wait()
             if event.type == pygame.QUIT:
@@ -61,26 +103,47 @@ def main():
                     break
 
             # Game logic
+            # when button is pressed
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                for i in range(3):
-                    for j in range(3):
-                        if board[i][j] == NOPLAYER and board_view[i][j].collidepoint(pygame.mouse.get_pos()):
-                            if turn % 2 == 1:
+                # TODO: why is it like that?
+                for i in range(ROWS):
+                    for j in range(COLUMNS):
+                        print(i, j, board[i][j], board_view[i][j], board_view[i][j].collidepoint((115, 375)))
+                        player = turn % 2
+
+                        if board[i][j] == NOPLAYER and board_view[i][j].collidepoint((115, 375)):
+                            if player == 1:
                                 board[i][j] = PLAYER1
                             else:
                                 board[i][j] = PLAYER2
                             turn += 1
+                            if is_win(player, board, i, j):
+                                if player == 1:
+                                    screen.fill(PLAYER1_COLOR)
+                                    winner = "player 1"
+                                else:
+                                    screen.fill(PLAYER2_COLOR)
+                                    winner = "player 2"
+                                winning_font = pygame.font.SysFont('Comic Sans MS', 15)
+                                winning_text = winning_font.render(WINNING_MESSAGE.format(winner), False, (0, 0, 0))
+                                screen.blit(winning_text, (0, 0))
+                                pygame.display.update()
+                                victory = True
+                                time.sleep(5)
 
-            # Draw the board
-            screen.fill(PURPLE)
-            pygame.draw.rect(screen, BLACK, [TOPRIGHT_CORNER[0], TOPRIGHT_CORNER[1],
-                                             BOARD_SIZE[0], BOARD_SIZE[1]])
-            for i in range(3):
-                for j in range(3):
-                    pygame.draw.rect(screen, board[i][j], board_view[i][j])
-            pygame.display.update()
+            # show regular updated board
+            if not victory:
+                # Draw the board
+                screen.fill(PURPLE)
+                pygame.draw.rect(screen, BLACK, [TOPRIGHT_CORNER[0], TOPRIGHT_CORNER[1],
+                                                 BOARD_SIZE[0], BOARD_SIZE[1]])
+                for i in range(ROWS):
+                    for j in range(COLUMNS):
+                        pygame.draw.rect(screen, PLAYER_COLORS[board[i][j]], board_view[i][j])
+                pygame.display.update()
 
     finally:
+        # todo: maybe print something before quiting
         pygame.quit()
 
 
