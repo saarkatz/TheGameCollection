@@ -163,7 +163,7 @@ class App:
                     font_index = (self.font_index - 1) % len(FONTS)
                     text.text.font = FONTS[font_index]
                 elif event.key == pygame.K_n:
-                    text_index = (self.text_index + 1) % len(self.texts)
+                    self.text_index = (self.text_index + 1) % len(self.texts)
 
             elif event.key not in (pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT,
                                    pygame.K_RIGHT):
