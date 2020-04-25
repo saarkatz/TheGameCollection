@@ -1,5 +1,5 @@
 import pygame
-from .ui import UiBase
+from ui import UiBase
 
 BLACK = (0, 0, 0)
 

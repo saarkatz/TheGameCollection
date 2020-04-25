@@ -2,7 +2,7 @@
 Transform is responsible for all the spatial meta data an object in the
 space would need.
 """
-from .vector import Vector
+from space2d.vector import Vector
 
 
 class Transform:

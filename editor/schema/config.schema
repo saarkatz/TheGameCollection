@@ -1,0 +1,33 @@
+{
+  "definitions": {
+    "vector": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+    "octet": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+    "color": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/octet"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "caption": {"type": "string"},
+    "resolution": {"$ref": "#/definitions/vector"},
+    "background": {"$ref": "#/definitions/color"}
+  },
+  "required": ["caption","resolution", "background"]
+}

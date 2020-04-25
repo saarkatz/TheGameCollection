@@ -1,0 +1,26 @@
+{
+  "definitions": {
+    "jsonpath": {
+      "type": "string",
+      "patter": "^/?([\\w.-]+/)*[\\w.-]+\\.json$"
+    },
+    "schemapath": {
+      "type": "string",
+      "pattern": "^/?([\\w.-]+/)*[\\w.-]+\\.schema$"
+    },
+    "jsonfile": {
+      "type": "object",
+      "properties": {
+        "file": {"$ref": "#/definitions/jsonpath"},
+        "schema": {"$ref": "#/definitions/schemapath"}
+      },
+      "required": ["file", "schema"]
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "config": {"$ref": "#/definitions/jsonfile"}
+  },
+  "required": ["config"]
+}
