@@ -137,7 +137,7 @@ class App:
     def event(self, event):
         # Handle quit events
         if event.type == pygame.QUIT:
-            running = False
+            self.running = False
 
         for obj in self.gizmos:
             if obj.gizmo_hover:
