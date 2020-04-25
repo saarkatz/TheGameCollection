@@ -38,7 +38,7 @@ class Gizmo:
         self.control_cache = None
 
     # Gizmo functions
-    def draw_gizmo(self, screen):
+    def gizmo_draw(self, screen):
         # Draw the rectangle of the shape
         if self.gizmo_hover:
             pygame.draw.rect(screen, BLUE, (self.ui.transform.position,

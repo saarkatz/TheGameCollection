@@ -2,7 +2,7 @@ import json
 import jsonschema
 import munch
 
-import app
+from app import App
 
 
 def load_json(jsonfile):
@@ -23,7 +23,8 @@ def main():
     }))
 
     config = load_json(meta.config)
-    app.main(**config)
+    app = App(**config)
+    app.run()
 
 
 if __name__ == '__main__':
