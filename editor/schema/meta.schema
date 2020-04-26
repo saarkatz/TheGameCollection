@@ -1,5 +1,9 @@
 {
   "definitions": {
+    "absolutefolderpath": {
+      "type": "string",
+      "pattern": "^/([\\w.-]+/)*[\\w.-]+/$"
+    },
     "jsonpath": {
       "type": "string",
       "patter": "^/?([\\w.-]+/)*[\\w.-]+\\.json$"
@@ -20,7 +24,9 @@
 
   "type": "object",
   "properties": {
-    "config": {"$ref": "#/definitions/jsonfile"}
+    "projectroot": {"$ref": "#/definitions/absolutefolderpath"},
+    "config": {"$ref": "#/definitions/jsonfile"},
+    "objects": {"$ref": "#/definitions/jsonfile"}
   },
-  "required": ["config"]
+  "required": ["projectroot","config", "objects"]
 }

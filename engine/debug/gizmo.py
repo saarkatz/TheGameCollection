@@ -1,5 +1,5 @@
 import pygame
-from space2d.vector import Vector
+from engine.space2d.vector import Vector
 
 
 BLUE = (0, 0, 255, 127)

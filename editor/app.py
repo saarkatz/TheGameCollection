@@ -2,9 +2,9 @@ import time
 import pygame
 
 from engine.debug import Gizmo
+from engine.space2d.vector import Vector
 from uitext import UiText
 from transform import Transform
-from space2d.vector import Vector
 from text import Text
 
 WHITE = (255, 255, 255)

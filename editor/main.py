@@ -1,8 +1,10 @@
+import os
 import json
 import jsonschema
 import munch
 
-from app import App
+from engine.game_object import GameObject
+from engine.utils.path import normalize
 
 
 def load_json(jsonfile):
@@ -19,11 +21,23 @@ def main():
     # search for the meta.json and meta.schema in data and schema respectively
     meta = load_json(munch.munchify({
         'schema': 'schema/meta.schema',
-        'file': 'data/meta.json'
+        'file': 'meta.json'
     }))
 
+    # Add the project root to the system path
+    import sys
+    sys.path.append(normalize(meta.projectroot))
+
+    # Load data
     config = load_json(meta.config)
+    objects = GameObject.objectify(load_json(meta.objects))
+
+    # Import the app
+    from app import App
+
+    # Initiate the app
     app = App(**config)
+    app.gameobjects.extend(objects)
     app.run()
 
 

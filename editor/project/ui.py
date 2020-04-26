@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from space2d.vector import Vector
+from engine.space2d.vector import Vector
 
 
 class UiBase(ABC):

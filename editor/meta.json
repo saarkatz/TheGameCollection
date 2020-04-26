@@ -1,0 +1,11 @@
+{
+  "projectroot": "/c/Users/Saar/Documents/Projects/Programming/TheGameCollection/editor/project/",
+  "config": {
+    "file": "data/config.json",
+    "schema": "schema/data/config.schema"
+  },
+  "objects": {
+    "file": "data/objects.json",
+    "schema": "schema/data/objects.schema"
+  }
+}

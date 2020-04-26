@@ -1,6 +1,0 @@
-{
-  "config": {
-    "file": "data/config.json",
-    "schema": "schema/config.schema"
-  }
-}

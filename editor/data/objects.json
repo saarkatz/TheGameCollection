@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Object1",
+    "children": [
+      {
+        "name": "subObject1"
+      }
+    ],
+    "components": []
+  },
+  {
+    "name": "Object2",
+    "children": [],
+    "components": []
+  },
+  {
+    "name": "Object3",
+    "children": [],
+    "components": []
+  }
+]
