@@ -1,0 +1,25 @@
+{
+  "$id": "types/path.json",
+  "absolute": {
+    "folder": {
+      "type": "string",
+      "pattern": "^/([\\w.-]+/)*[\\w.-]+/$"
+    }
+  },
+  "python": {
+    "type": "string",
+    "patter": "^/?([\\w.-]+/)*[\\w.-]+\\.py$"
+  },
+  "json": {
+    "type": "string",
+    "patter": "^/?([\\w.-]+/)*[\\w.-]+\\.json$"
+  },
+  "json_object": {
+    "type": "object",
+    "properties": {
+      "file": {"$ref": "#/json"},
+      "schema": {"$ref": "#/json"}
+    },
+    "required": ["file", "schema"]
+  }
+}

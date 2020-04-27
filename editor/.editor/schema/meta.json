@@ -1,0 +1,10 @@
+{
+  "$id": "meta.json",
+  "type": "object",
+  "properties": {
+    "project_root": {"$ref": "types/path.json#/absolute/folder"},
+    "config": {"$ref": "types/path.json#/json_object"},
+    "objects": {"$ref": "types/path.json#/json_object"}
+  },
+  "required": ["project_root","config", "objects"]
+}

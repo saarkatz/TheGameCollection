@@ -1,0 +1,5 @@
+{
+  "$id": "data/objects.json",
+  "type": "array",
+  "items": {"$ref": "../types/editor.json#/gameobject"}
+}

@@ -1,11 +1,12 @@
 {
-  "projectroot": "/c/Users/Saar/Documents/Projects/Programming/TheGameCollection/editor/",
+  "schema_root": "/c/Users/Saar/Documents/Projects/Programming/TheGameCollection/editor/.editor/schema",
+  "project_root": "/c/Users/Saar/Documents/Projects/Programming/TheGameCollection/editor/",
   "config": {
     "file": "data/config.json",
-    "schema": "schema/data/config.schema"
+    "schema": "schema/data/config.json"
   },
   "objects": {
     "file": "data/objects.json",
-    "schema": "schema/data/objects.schema"
+    "schema": "schema/data/objects.json"
   }
 }

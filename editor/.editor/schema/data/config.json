@@ -1,0 +1,10 @@
+{
+  "$id": "data/config.json",
+  "type": "object",
+  "properties": {
+    "caption": {"type": "string"},
+    "resolution": {"$ref": "../types/data.json#/vector"},
+    "background": {"$ref": "../types/data.json#/color"}
+  },
+  "required": ["caption","resolution", "background"]
+}

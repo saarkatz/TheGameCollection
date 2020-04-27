@@ -160,11 +160,11 @@ class App:
                 elif event.key == pygame.K_MINUS:
                     text.text.size -= 1
                 elif event.key == pygame.K_f:
-                    font_index = (self.font_index + 1) % len(FONTS)
-                    text.text.font = FONTS[font_index]
+                    self.font_index = (self.font_index + 1) % len(FONTS)
+                    text.text.font = FONTS[self.font_index]
                 elif event.key == pygame.K_d:
-                    font_index = (self.font_index - 1) % len(FONTS)
-                    text.text.font = FONTS[font_index]
+                    self.font_index = (self.font_index - 1) % len(FONTS)
+                    text.text.font = FONTS[self.font_index]
                 elif event.key == pygame.K_n:
                     self.text_index = (self.text_index + 1) % len(self.texts)
 

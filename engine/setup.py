@@ -12,7 +12,7 @@ setup(
                 "development in python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/saarkatz/TheGameCollection",
+    url="https://github.com/saarkatz/TheGameCollection/tree/game_editor/engine",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",

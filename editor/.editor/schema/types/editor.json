@@ -1,0 +1,44 @@
+{
+  "$id": "types/editor.json",
+  "gameobject": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "children": {
+        "type": "array",
+        "items": {
+          "$ref": "#/gameobject"
+        }
+      },
+      "components": {
+        "type": "array",
+        "items": {
+          "$ref": "#/component"
+        }
+      }
+    }
+  },
+  "component": {
+    "type": "object",
+    "properties": {
+      "classref": {
+        "$ref": "#/classref"
+      }
+    }
+  },
+  "classref": {
+    "type": "object",
+    "properties": {
+      "file": {
+        "$ref": "path.json#/python"
+      },
+      "class": {
+        "type": "string",
+        "pattern": "^[\\w]+$"
+      }
+    },
+    "required": ["file", "class"]
+  }
+}

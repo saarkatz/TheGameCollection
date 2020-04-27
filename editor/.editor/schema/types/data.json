@@ -1,6 +1,6 @@
 {
-  "definitions": {
-    "vector": {
+  "$id": "types/data.json",
+  "vector": {
       "type": "array",
       "items": {
         "type": "number",
@@ -16,18 +16,9 @@
     "color": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/octet"
+        "$ref": "#/octet"
       },
       "minItems": 3,
       "maxItems": 3
     }
-  },
-
-  "type": "object",
-  "properties": {
-    "caption": {"type": "string"},
-    "resolution": {"$ref": "#/definitions/vector"},
-    "background": {"$ref": "#/definitions/color"}
-  },
-  "required": ["caption","resolution", "background"]
 }
