@@ -1,5 +1,4 @@
 import json
-from engine.space2d import vector
 
 
 class GameObject:

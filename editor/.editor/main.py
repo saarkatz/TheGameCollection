@@ -1,10 +1,12 @@
-import os
+"""
+The main module bootstraps the application
+"""
 import json
 import jsonschema
 import munch
 
 from engine.game_object import GameObject
-from engine.utils.path import normalize
+from engine.utils.path import specify
 
 
 def load_json(jsonfile):
@@ -26,7 +28,7 @@ def main():
 
     # Add the project root to the system path
     import sys
-    sys.path.append(normalize(meta.projectroot))
+    sys.path.append(specify(meta.projectroot))
 
     # Load data
     config = load_json(meta.config)

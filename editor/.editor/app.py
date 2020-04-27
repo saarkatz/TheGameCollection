@@ -1,8 +1,11 @@
+"""
+The app module handles the main loop of the app
+"""
 import time
 import pygame
 
 from engine.debug import Gizmo
-from engine.space2d.vector import Vector
+from engine.space2d import Vector
 from uitext import UiText
 from transform import Transform
 from text import Text
