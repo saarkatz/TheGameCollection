@@ -1,6 +1,5 @@
 from string import ascii_letters
 from random import choice
-import pygame
 
 
 def check_win(secret_word, old_letters_guessed):
@@ -16,7 +15,7 @@ def check_win(secret_word, old_letters_guessed):
     return True
 
 
-def get_hidden_word(secret_word, old_letters_guessed):
+def get_secret_word(secret_word, old_letters_guessed):
     """
    Returns the secret word: the letters that were guessed are shown,
     Other letters appear as "_"
@@ -107,7 +106,7 @@ def main():
     secret_word = choose_random_word(word_file)
     print("Let's start!")
     while not is_win and tries_left > 0:
-        print("This is your word: {word}".format(word=get_hidden_word(secret_word, old_letters_guessed)))
+        print("This is your word: {word}".format(word=get_secret_word(secret_word, old_letters_guessed)))
         if old_letters_guessed:
             print("Your guesses: {guesses}".format(guesses=" ".join(old_letters_guessed)))
         print("Tries left: {tries}".format(tries=tries_left))
@@ -117,7 +116,7 @@ def main():
                                                                     tries_left)
         is_win = check_win(secret_word, old_letters_guessed)
 
-    print("You guessed: {word}".format(word=get_hidden_word(secret_word, old_letters_guessed)))
+    print("You guessed: {word}".format(word=get_secret_word(secret_word, old_letters_guessed)))
     print("The word was: {secret_word}".format(secret_word=secret_word))
     if tries_left > 0:
         win()
