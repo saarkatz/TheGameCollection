@@ -27,12 +27,13 @@ class WordList:
         return words
 
 
-class SecretWord:
-    def __init__(self, word, tries):
-        self.word = word
+class HangmanLogic:
+    def __init__(self, secret_word, tries):
+        self.secret_word = secret_word
         self.tries = tries
         self.mistakes = 0
         self.guesses_list = []
+        self.is_win = False
 
     def get_word(self):
         """
@@ -41,7 +42,7 @@ class SecretWord:
         :return: the secret word, with only the guessed letters shown
         """
         secret_word_shown = ""
-        for letter in self.word:
+        for letter in self.secret_word:
             if letter in self.guesses_list:
                 secret_word_shown += letter
             else:
@@ -58,7 +59,7 @@ class SecretWord:
         letter = letter.lower()
         if self.check_valid_input(letter):
             self.guesses_list.append(letter)
-            if letter not in self.word:
+            if letter not in self.secret_word:
                 self.tries -= 1
 
     def check_valid_input(self, guessed_letter):
@@ -80,7 +81,7 @@ class SecretWord:
         Checks if player won.
         :return: True if won, else - False
         """
-        for letter in self.word:
+        for letter in self.secret_word:
             if letter not in self.guesses_list:
                 return False
         return True

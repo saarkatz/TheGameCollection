@@ -2,80 +2,82 @@
 The view of the board
 """
 import pygame
+from os import listdir
+from string import ascii_letters
 
-BORDER_SIZE_HINT = .017
-COLORS = [
-    (255, 255, 255),  # WHITE
-    (255, 234, 181),
-    (255, 213, 151),
-    (255, 191, 128),
-    (255, 170, 108),
-    (255, 149, 90),
-    (255, 128, 75),
-    (255, 106, 60),
-    (255, 85, 47),
-    (255, 64, 34),
-    (255, 43, 22),
-    (255, 21, 11),
-    (255, 0, 0),
-]
+RESOLUTION = (600, 600)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (128, 0, 0)
+COLORS = {"black": (0, 0, 0), "darkgray": (70, 70, 70), "gray": (128, 128, 128), "lightgray": (200, 200, 200),
+          "white": (255, 255, 255), "red": (255, 0, 0),
+          "darkred": (128, 0, 0), "green": (0, 255, 0), "darkgreen": (0, 128, 0), "blue": (0, 0, 255),
+          "navy": (0, 0, 128), "darkblue": (0, 0, 128),
+          "yellow": (255, 255, 0), "gold": (255, 215, 0), "orange": (255, 165, 0), "lilac": (229, 204, 255),
+          "lightblue": (135, 206, 250), "teal": (0, 128, 128),
+          "cyan": (0, 255, 255), "purple": (150, 0, 150), "pink": (238, 130, 238), "brown": (139, 69, 19),
+          "lightbrown": (222, 184, 135), "lightgreen": (144, 238, 144),
+          "turquoise": (64, 224, 208), "beige": (245, 245, 220), "honeydew": (240, 255, 240),
+          "lavender": (230, 230, 250), "crimson": (220, 20, 60)}
+
+BOARD_SIZE = (400, 400)
+BORDER_SIZE = (10, 10)
 
 
 class BoardView:
-    def __init__(self, board, screen):
+    def __init__(self, secret_word, screen, pic_dir, sound_dir):
         pygame.font.init()
-        self.screen = screen
-        self.board = board
         self.font = pygame.font.SysFont('Comic Sans MS', 30)
+        self.screen = screen
+        self.secret_word = secret_word
+        self.buttons_list = []
+        j = 0
+        for number, letter in enumerate(ascii_letters):
+            if number > 12:  # TO ALIGN THE LETTERS ON THE SCREEN ( HORIZONTALLY )
+                number = number - 13
+                j = 1
+            self.buttons_list.append(Button(COLORS["gray"], (70 + number * 90, 140 + j * 60), 50, 50, letter,
+                                       pygame.font.SysFont(None, 50)))
 
-        self.size_cache = None
+        # initiate images
+        self.images = {}
+        for image in listdir(pic_dir):
+            if ".png" in image:
+                image_path = "{dir}/{filename}".format(dir=pic_dir, filename=image)
+                self.images[image] = pygame.image.load(image_path)
 
-        # Init ui_stage
-        self.ui_stage = [
-            [pygame.Rect(0, 0, 0, 0) for _ in range(self.board.get_size(1))]
-            for _ in range(self.board.get_size(0))
-        ]
-
-    def update_sizes(self):
-        if self.size_cache == self.screen.get_size():
-            return
-        else:
-            self.size_cache = self.screen.get_size()
-
-        # Update the size of the stage
-        width, height = self.screen.get_size()
-        w_border = int(width * BORDER_SIZE_HINT)
-        h_border = int(height * BORDER_SIZE_HINT)
-        w_squere = (width - w_border * (self.get_size(0) + 1)
-                    ) // self.get_size(0)
-        h_squere = (height - h_border * (self.get_size(1) + 1)
-                    ) // self.get_size(1)
-
-        for x in range(self.get_size(0)):
-            for y in range(self.get_size(1)):
-                self.ui_stage[x][y].left = w_border + (w_squere + w_border) * x
-                self.ui_stage[x][y].bottom = \
-                    h_border + (h_squere + h_border) * y
-                self.ui_stage[x][y].size = (w_squere, h_squere)
+        # initiate sounds
+        self.sounds = {}
+        for sound in listdir(sound_dir):
+            if ".wav" in sound:
+                sound_path = "{dir}/{filename}".format(dir=sound_dir, filename=sound)
+                self.sounds[sound] = pygame.mixer.Sound(sound_path)
 
     def update(self):
-        self.update_sizes()
-        for x in range(self.get_size(0)):
-            for y in range(self.get_size(1)):
-                pygame.draw.rect(self.screen, COLORS[self.board[x, y]],
-                                 self.ui_stage[x][y])
-                if self.board[x, y] > 0:
-                    text = self.font.render(str(2 ** self.board[x, y]), False,
-                                            (0, 0, 0))
-                    self.screen.blit(
-                        text,
-                        (self.ui_stage[x][y].left + self.ui_stage[x][y].w // 2,
-                         self.ui_stage[x][y].top + self.ui_stage[x][y].h // 2)
-                    )
+        for letter in self.buttons_list:  # DRAWING
+            letter.draw(self.screen)  # THE BUTTONS
 
-    def get_size(self, dim):
-        return self.board.get_size(dim)
 
-    def __getitem__(self, item):
-        assert 2 == len(item)
-        return self.ui_stage[item[0]][item[1]]
+class Button(object):  # A GENERAL CLASS FOR ALL THE BUTTONS ON THE SCREEN (LETTERS & LANGUAGE BUTTONS)
+    def __init__(self, color, pos, width, height, text, font, size=40):
+        self.clicked = False  # A VARIABLE ONLY FOR TYPE 1
+        self.rollOver = False  # A VARIABLE ONLY FOR TYPE 1
+        self.size = size
+        self.font = font
+        self.color = color
+        self.text = text
+        self.pos = pos
+        self.width = width
+        self.height = height
+        self.subsurface = pygame.Surface((self.width, self.height))  # CREATING A SUBSURFACE
+        self.subsurface.fill(self.color)  # GET A RECT (FOR COLLISION)
+        self.text = self.font.render(self.text, True, COLORS["white"])
+
+    def draw(self, surface):
+        if self.rollOver:  # IF A TYPE 1 BUTTON IS UNDER
+            self.subsurface.set_alpha(200)  # THE MOUSE, MAKE IT LESS VIBRANT
+        else:
+            self.subsurface.set_alpha(255)
+        if not self.clicked:
+            surface.blit(self.subsurface, self.pos)
+            self.subsurface.blit(self.text, (self.width / 4, self.height / 5))
